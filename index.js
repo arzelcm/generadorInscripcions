@@ -25,7 +25,8 @@ async function downloadInscriptions() {
     for (const inscription of inscriptions) {
         const year_ = inscription[3].split('/')[2];
         if (true || year_ == 2011 || year_ == 2012 || year_ == 2010) {
-            console.log(inscription);
+            const url = 'assets/inscription.pdf';
+            const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
 
             const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes)
 
