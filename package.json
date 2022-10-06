@@ -1,0 +1,26 @@
+{
+  "name": "generadorinscripcions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://arzelcm: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@github.com/arzelcm/generadorInscripcions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arzelcm/generadorInscripcions/issues"
+  },
+  "homepage": "https://github.com/arzelcm/generadorInscripcions#readme",
+  "dependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
+    "jquery-csv": "^1.0.21",
+    "jspdf": "^2.5.1",
+    "node-fetch": "^3.2.10",
+    "pdf-lib": "^1.17.1"
+  }
+}
