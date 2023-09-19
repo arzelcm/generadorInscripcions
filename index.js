@@ -6,15 +6,18 @@ window.onload = () => {
     setEventListeners();
 }
 
-function setEventListeners() {
-    fileInput.addEventListener("change", () => {
+async function setEventListeners() {
+    // TODO: Discomment for prod
+    // fileInput.addEventListener("change", () => {
         const reader = new FileReader();
         reader.onload = () => {
             inscriptions = getInscriptionsFromCSVData(reader.result);
             console.log(inscriptions);
+            downloadInscriptions();
         }
-        reader.readAsText(fileInput.files[0]);
-    })
+        reader.readAsText(await fetch('assets/inscris.csv').then(r => r.blob()));
+        // reader.readAsText(fileInput.files[0]);
+    // })
 
     downloadButton.addEventListener('click', () => {
         downloadInscriptions();
@@ -26,8 +29,7 @@ async function downloadInscriptions() {
     for (const inscription of inscriptions) {
         const year_ = inscription[3].split('/')[2];
         if (true || year_ == 2011 || year_ == 2012 || year_ == 2010) {
-            const url = 'assets/inscription.pdf';
-            const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+            const existingPdfBytes = await fetch('assets/inscripcioSantJosep2023.pdf').then(res => res.arrayBuffer())
 
             const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes)
 
@@ -35,11 +37,11 @@ async function downloadInscriptions() {
             const firstPage = pages[0];
             const { width, height } = firstPage.getSize()
 
-            const activityName = getActivityByDate(inscription[4]) || '';
+            const activityName = getActivityByDate(inscription[3]) || '';
             // Activitat
             firstPage.drawText(activityName, {
-                x: 200,
-                y: height - 127,
+                x: 177,
+                y: height - 115,
                 size: 12
             })
 
@@ -49,101 +51,101 @@ async function downloadInscriptions() {
             const surname = completeName.slice(spaceIndex + 1);
             // Cognoms
             firstPage.drawText(surname, {
-                x: 200,
-                y: height - 185,
+                x: 177,
+                y: height - 166,
                 size: 11
             })
 
             // Nom
             firstPage.drawText(name || '', {
-                x: 420,
-                y: height - 185,
+                x: 422,
+                y: height - 166,
                 size: 11
             })
 
             // Data Naixement
-            firstPage.drawText(inscription[4] || '', {
-                x: 200,
-                y: height - 201,
+            firstPage.drawText(inscription[3] || '', {
+                x: 177,
+                y: height - 193,
                 size: 10
             })
 
             // Adreça
-            firstPage.drawText(inscription[5] || '', {
-                x: 200,
-                y: height - 217,
+            firstPage.drawText(inscription[4] || '', {
+                x: 177,
+                y: height - 219,
                 size: 10
             })
 
             // Població
-            firstPage.drawText(inscription[6] || '', {
-                x: 200,
-                y: height - 233,
+            firstPage.drawText(inscription[5] || '', {
+                x: 177,
+                y: height - 244,
                 size: 10
             })
 
             // CP
-            firstPage.drawText(inscription[7] || '', {
-                x: 420,
-                y: height - 233,
+            firstPage.drawText(inscription[6] || '', {
+                x: 422,
+                y: height - 244,
                 size: 10
             })
 
             // Tel Contacte1
-            firstPage.drawText(inscription[11] || '', {
-                x: 200,
-                y: height - 266,
+            firstPage.drawText(inscription[10] || '', {
+                x: 177,
+                y: height - 296,
                 size: 10
             })
 
             // Nom Contacte1
-            firstPage.drawText(inscription[8] || '', {
+            firstPage.drawText(inscription[7] || '', {
                 x: 360,
-                y: height - 266,
+                y: height - 296,
                 size: 10
             })
 
             // Tel Contacte2
-            firstPage.drawText(inscription[15] || '', {
-                x: 200,
-                y: height - 281,
+            firstPage.drawText(inscription[14] || '', {
+                x: 177,
+                y: height - 321,
                 size: 10
             })
 
             // Nom Contacte2
-            firstPage.drawText(inscription[13] || '', {
+            firstPage.drawText(inscription[12] || '', {
                 x: 360,
-                y: height - 281,
+                y: height - 321,
                 size: 10
             })
 
             // Correu 1
-            firstPage.drawText(inscription[10] || '', {
-                x: 200,
-                y: height - 311,
+            firstPage.drawText(inscription[9] || '', {
+                x: 177,
+                y: height - 374,
                 size: 10
             })
 
             // Correu 2
-            firstPage.drawText(inscription[14] || '', {
-                x: 200,
-                y: height - 326,
+            firstPage.drawText(inscription[13] || '', {
+                x: 177,
+                y: height - 400,
                 size: 10
             })
 
             // Autorització imatge
-            if (inscription[18] == 'Sí') {
+            if (inscription[17] == 'Sí') {
                 // ticksi
                 firstPage.drawText('x', {
-                    x: 238,
-                    y: height - 563,
+                    x: width - 110.5,
+                    y: height - 620,
                     size: 12
                 })
             } else {
                 // tickno
                 firstPage.drawText('x', {
-                    x: 263,
-                    y: height - 563,
+                    x: width - 86.9,
+                    y: height - 620,
                     size: 12
                 })
             }
@@ -368,7 +370,7 @@ async function downloadInscriptions() {
                 lineHeight: wrappedObservacions.lineHeight
             })
 
-            const fileName = `${inscription[2].toLowerCase()}-${activityName.toLowerCase()}`;
+            const fileName = `${inscription[2].toLowerCase().trim()} ${activityName.toLowerCase()}`;
             const pdfDataUri = await pdfDoc.saveAsBase64({ dataUri: false });
             if (pdfDataUri) console.count('downloading'); console.log(fileName);
             downloadPDF(pdfDataUri, fileName);
@@ -378,27 +380,30 @@ async function downloadInscriptions() {
 }
 
 function getActivityByDate(date) {
+    console.log('date:', date);
     const yearsMap = {
-        2017: 'Colònies Minis',
-        2016: 'Colònies Minis',
-        2015: 'Colònies Minis',
-        2014: 'Colònies Petits',
-        2013: 'Colònies Petits',
-        2011: 'Colònies Grans',
-        2012: 'Colònies Grans',
-        2010: 'Campaments Trauet',
-        2009: 'Campaments Trau',
-        2008: 'Ruta Projecte Carbó',
-        2007: 'Ruta Projecte Menta',
-        2006: 'Ruta Projecte Malva',
-        2005: 'Ruta Projecte Taronja',
-        2004: 'Colònies Projecte Rubí',
-        2003: 'Colònies Projecte Indi',
-        2002: 'Colònies Projecte Blanc',
-        2001: 'Colònies Projecte Zinc',
-        2000: 'Colònies Projecte Safir',
-        1999: 'Colònies Projecte Coure',
-        1998: 'Colònies Projecte Llima',
+        2018: 'Casal Hivern Minis 2023-2024',
+        2017: 'Casal Hivern Minis 2023-2024',
+        2016: 'Casal Hivern Minis 2023-2024',
+        2015: 'Casal Hivern Petits 2023-2024',
+        2014: 'Casal Hivern Petits 2023-2024',
+        2013: 'Casal Hivern Grans 2023-2024',
+        2012: 'Casal Hivern Grans 2023-2024',
+        2011: 'Casal Hivern Trauet 2023-2024',
+        2010: 'Casal Hivern Trau 2023-2024',
+        2009: 'Projecte Nou 2023-2024',
+        2008: 'Projecte Carbó 2023-2024',
+        2007: 'Projecte Menta 2023-2024',
+        2006: 'Projecte Malva 2023-2024',
+        2005: 'Projecte Taronja 2023-2024',
+        2004: 'Projecte Rubí 2023-2024',
+        2003: 'Projecte Indi 2023-2024',
+        2002: 'Projecte Blanc 2023-2024',
+        2001: 'Projecte Zinc 2023-2024',
+        2000: 'Projecte Safir 2023-2024',
+        1999: 'Projecte Coure 2023-2024',
+        1998: 'Projecte Llima 2023-2024',
+        '': 'Casal Hivern 2023-2024'
     }
     const year = date.split('/')[2];
     return yearsMap[year];
