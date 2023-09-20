@@ -7,17 +7,16 @@ window.onload = () => {
 }
 
 async function setEventListeners() {
-    // TODO: Discomment for prod
-    // fileInput.addEventListener("change", () => {
+    fileInput.addEventListener("change", () => {
         const reader = new FileReader();
         reader.onload = () => {
             inscriptions = getInscriptionsFromCSVData(reader.result);
             console.log(inscriptions);
-            downloadInscriptions();
+            // downloadInscriptions();
         }
-        reader.readAsText(await fetch('assets/inscris.csv').then(r => r.blob()));
-        // reader.readAsText(fileInput.files[0]);
-    // })
+        // reader.readAsText(await fetch('assets/inscris.csv').then(r => r.blob()));
+        reader.readAsText(fileInput.files[0]);
+    })
 
     downloadButton.addEventListener('click', () => {
         downloadInscriptions();
@@ -151,220 +150,211 @@ async function downloadInscriptions() {
             }
 
             // Autorització tornar sol/a
-            if (inscription[19] == 'Sí') {
+            if (inscription[18] == 'Sí') {
                 // ticksi
                 firstPage.drawText('x', {
-                    x: 284,
-                    y: height - 584,
+                    x: 307,
+                    y: height - 639.5,
                     size: 12
                 })
             } else {
                 // tickno
                 firstPage.drawText('x', {
-                    x: 308,
-                    y: height - 584,
+                    x: 329,
+                    y: height - 639.5,
                     size: 12
                 })
             }
 
 
             // Autorització medicaments
-            if (inscription[20] == 'Sí') {
+            if (inscription[19] == 'Sí') {
                 // ticksi
                 firstPage.drawText('x', {
-                    x: 362,
-                    y: height - 619,
+                    x: 326.5,
+                    y: height - 673.5,
                     size: 12
                 })
             } else {
                 // tickno
                 firstPage.drawText('x', {
-                    x: 387,
-                    y: height - 619,
+                    x: 350,
+                    y: height - 673.5,
                     size: 12
                 })
             }
 
 
             // Pes
-            firstPage.drawText('Pes: ' + inscription[21] + 'kg', {
-                x: 430,
-                y: height - 619,
-                size: 7
+            firstPage.drawText(inscription[20], {
+                x: 120,
+                y: height - 687,
+                size: 10
             })
+
+            // Protocols comi lila
+            if (inscription[35] == 'Conec els protocols i hi estic d\'acord.') {
+                firstPage.drawText('x', {
+                    x: 49,
+                    y: height - 709,
+                    size: 10
+                })   
+            }
 
             /* PAGE 2 */
             const secondPage = pages[1];
             console.log(inscription);
 
             // Ha de seguir algun règim de salut?
-            secondPage.drawText(inscription[26] || '', {
-                x: 85,
-                y: height - 110,
-                size: 10
+            secondPage.drawText(inscription[25] || '', {
+                x: 53,
+                y: height - 115,
+                size: 9
             })
 
 
             // És habil
+            if (inscription[21] == 'Sí') {
+                // ticksi
+                secondPage.drawText('x', {
+                    x: 106,
+                    y: height - 166.5,
+                    size: 12
+                })
+            } else {
+                // tickno
+                secondPage.drawText('x', {
+                    x: 130,
+                    y: height - 166.5,
+                    size: 12
+                })
+            }
+
+
+            // Sap nedar
             if (inscription[22] == 'Sí') {
                 // ticksi
                 secondPage.drawText('x', {
-                    x: 129,
-                    y: height - 170,
+                    x: 116,
+                    y: height - 191.5,
                     size: 12
                 })
             } else {
                 // tickno
                 secondPage.drawText('x', {
-                    x: 158,
-                    y: height - 170,
+                    x: 140,
+                    y: height - 191.5,
                     size: 12
                 })
             }
-
-
-            // Sap nedar
-            if (inscription[23] == 'Sí') {
-                // ticksi
-                secondPage.drawText('x', {
-                    x: 158,
-                    y: height - 188,
-                    size: 12
-                })
-            } else {
-                // tickno
-                secondPage.drawText('x', {
-                    x: 193,
-                    y: height - 188,
-                    size: 12
-                })
-            }
-
-
-            // Sap nedar
-            /*if (inscription[22] == 'Sí') {
-                // ticksi
-                secondPage.drawText('x', {
-                    x: 158,
-                    y: height - 188,
-                    size: 12
-                })
-            } else {
-                // tickno
-                secondPage.drawText('x', {
-                    x: 193,
-                    y: height - 188,
-                    size: 12
-                })
-            }*/
 
 
             // Es fatiga
-            if (inscription[24] == 'Sí') {
+            if (inscription[23] == 'Sí') {
                 // ticksi
                 secondPage.drawText('x', {
-                    x: 193,
-                    y: height - 206,
+                    x: 153.2,
+                    y: height - 216,
                     size: 12
                 })
             } else {
                 // tickno
                 secondPage.drawText('x', {
-                    x: 229,
-                    y: height - 206,
+                    x: 177.2,
+                    y: height - 216,
                     size: 12
                 })
             }
 
             // Es mareja
-            if (inscription[25] == 'Sí') {
+            if (inscription[24] == 'Sí') {
                 // ticksi
                 secondPage.drawText('x', {
-                    x: 229,
-                    y: height - 224,
+                    x: 173.3,
+                    y: height - 240.7,
                     size: 12
                 })
             } else {
                 // tickno
                 secondPage.drawText('x', {
-                    x: 264,
-                    y: height - 224,
+                    x: 197.3,
+                    y: height - 240.7,
                     size: 12
                 })
             }
 
 
             // es posa malalt?
-            const wrapMalalt = wrap({text: inscription[27]})
+            const wrapMalalt = wrap({text: inscription[26]})
             secondPage.drawText(wrapMalalt.text || '', {
-                x: 85,
-                y: height - 275,
+                x: 53,
+                y: height - 285,
                 size: wrapMalalt.size,
                 lineHeight: wrapMalalt.lineHeight
             })
 
             // alèrgia
-            const wrapAlergia = wrap({text: inscription[28]})
+            const wrapAlergia = wrap({text: inscription[27]})
             secondPage.drawText(wrapAlergia.text || '', {
-                x: 85,
-                y: height - 315,
+                x: 53,
+                y: height - 325,
                 size: wrapAlergia.size,
                 lineHeight: wrapAlergia.lineHeight
             })
 
             // malaltia
-            const wrappedMalaltia = wrap({text: inscription[29]});
+            const wrappedMalaltia = wrap({text: inscription[28]});
             secondPage.drawText(wrappedMalaltia.text || '', {
-                x: 85,
-                y: height - 355,
+                x: 53,
+                y: height - 370,
                 size: wrappedMalaltia.size,
                 lineHeight: wrappedMalaltia.lineHeight
             })
-
-            // medicament
-            const wrappedMedicament = wrap({text: inscription[31]});
-            secondPage.drawText(wrappedMedicament.text || '', {
-                x: 85,
-                y: height - 400,
-                size: wrappedMedicament.size,
-                lineHeight: wrappedMedicament.lineHeight
+            
+            // vacunes
+            const wrappedVacunes = wrap({text: inscription[29]});
+            secondPage.drawText(wrappedVacunes.text || '', {
+                x: 53,
+                y: height - 410,
+                size: wrappedVacunes.size,
+                lineHeight: wrappedVacunes.lineHeight
             })
 
-            // vacunes
-            const wrappedVacunes = wrap({text: inscription[30]});
-            secondPage.drawText(wrappedVacunes.text || '', {
-                x: 85,
-                y: height - 445,
+            // medicament
+            const wrappedMedicament = wrap({text: inscription[30]});
+            secondPage.drawText(wrappedMedicament.text || '', {
+                x: 53,
+                y: height - 455,
                 size: wrappedMedicament.size,
                 lineHeight: wrappedMedicament.lineHeight
             })
 
             // impediments
-            const wrappedImpediments = wrap({text: inscription[32]});
+            const wrappedImpediments = wrap({text: inscription[31]});
             secondPage.drawText(wrappedImpediments.text || '', {
-                x: 85,
-                y: height - 490,
+                x: 53,
+                y: height - 502,
                 size: wrappedImpediments.size,
                 lineHeight: wrappedImpediments.lineHeight
             })
 
             // observacions
-            wrappedObservacions = wrap({text: inscription[33]})
+            wrappedObservacions = wrap({text: inscription[32]})
             secondPage.drawText(wrappedObservacions.text || '', {
-                x: 85,
-                y: height - 565,
+                x: 53,
+                y: height - 554,
                 size: wrappedObservacions.size,
                 lineHeight: wrappedObservacions.lineHeight
             })
 
             // Link al drive targeta sanitària
             wrappedObservacions = wrap({
-                text: inscription[34],
+                text: inscription[33],
                 maxHeight: 25,
                 size: 8
             })
             secondPage.drawText(wrappedObservacions.text || '', {
-                x: 85,
+                x: 48,
                 y: 22,
                 size: wrappedObservacions.size,
                 lineHeight: wrappedObservacions.lineHeight
