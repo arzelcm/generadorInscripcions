@@ -10,3 +10,9 @@ function getInscriptionsFromCSVData(fullText, firstRowForTitles = false) {
     if (firstRowForTitles) rows.shift();
     return rows;
 }
+
+const CSVToArray = (data, omitFirstRow = false, delimiter = ',') =>
+  data
+    .slice(omitFirstRow ? data.indexOf('\n') + 1 : 0)
+    .split('\n')
+    .map(v => v.split(delimiter));
