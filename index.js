@@ -1,17 +1,25 @@
-let fileInput, downloadButton, inscriptions;
+let inscriptions;
 
 window.onload = () => {
-    fileInput = document.getElementById('fileInput');
-    downloadButton = document.getElementById('downloadButton');
     setEventListeners();
 }
 
 async function setEventListeners() {
+    const fileInput = document.getElementById('fileInput');
+    const downloadButton = document.getElementById('downloadButton');
+    const chooseFileButton = document.getElementById('chooseFileButton');
+    const choosenFileLabel = document.getElementById('choosenFile');
+    const firstRowColTitleCheck = document.getElementById('firstRowColTitleCheck');
+    
     fileInput.addEventListener("change", () => {
         const reader = new FileReader();
         reader.onload = () => {
-            inscriptions = getInscriptionsFromCSVData(reader.result);
+            inscriptions = getInscriptionsFromCSVData(reader.result, firstRowColTitleCheck.checked == true);
             console.log(inscriptions);
+
+            choosenFileLabel.innerHTML = `<u>${fileInput.files[0].name}</u> (${inscriptions.length} inscripcions)`;
+            choosenFileLabel.classList.add('visible');
+
             // downloadInscriptions();
         }
         // reader.readAsText(await fetch('assets/inscris.csv').then(r => r.blob()));
@@ -21,6 +29,14 @@ async function setEventListeners() {
     downloadButton.addEventListener('click', () => {
         downloadInscriptions();
     });
+
+    chooseFileButton.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    firstRowColTitleCheck.addEventListener('change', () => {
+        fileInput.dispatchEvent(new Event('change'))
+    })
 }
 
 async function downloadInscriptions() {

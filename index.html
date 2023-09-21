@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador d'inscripcions Esplai Sant Josep</title>
     
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- STYLES -->
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    
     <!-- LIBS -->
     <script src="https://unpkg.com/pdf-lib"></script>
     <script src="CSVHelper.js"></script>
@@ -15,7 +22,44 @@
     <script src="index.js"></script>
 </head>
 <body>
-    <input type="file" id="fileInput">
-    <button id="downloadButton">Descarregar</button>
+    <div class="section nav">
+        <h3 class="bold">
+            Generador d'inscripcions 2023-2024
+        </h3>
+    </div>
+    <div class="section description">
+        <h4 class="bold">
+            Passos:
+        </h4>
+        <ol>
+            <li>
+                Descarregar l'excel d'inscripcions en format csv.
+            </li>
+            <li>
+                Clickar el botó "Seleccionar fitxer" i seleccionar el csv amb les inscripcions.
+            </li>
+            <li>
+                Comprovar que hi ha el mateix núm. d'inscripcions al missatget que surt a baix de la pantalla.
+            </li>
+            <li>
+                Clickar el botó "Descarregar".
+            </li>
+            <li>
+                Comprovar que s'han descarregat el mateix núm. de pdfs que d'inscripcions.
+            </li>
+        </ol>
+        <div class="checks">
+            <input type="checkbox" id="firstRowColTitleCheck" checked>
+            <label for="firstRowColTitleCheck">La primera fila correspon als títols de les columnes</label>
+        </div>
+    </div>
+    <div class="section actions">
+        <input type="file" id="fileInput" accept=".csv">
+        <button id="chooseFileButton">Seleccionar fitxer</button>
+        <button id="downloadButton">Descarregar</button>
+    </div>
+    <div class="floatingSection">
+        <div id="choosenFile"></div>
+    </div>
 </body>
 </html>

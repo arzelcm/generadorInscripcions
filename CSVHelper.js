@@ -1,4 +1,4 @@
-function getInscriptionsFromCSVData(fullText) {
+function getInscriptionsFromCSVData(fullText, firstRowForTitles = false) {
     const rows = [];
     for (const text of fullText.split('\n')){
     rows.push(text.match( /\s*(\"[^"]*\"|'[^']*'|[^,]*)\s*(,|$)/g ).map( function (text_) {
@@ -7,5 +7,6 @@ function getInscriptionsFromCSVData(fullText) {
         return text_;
       } ));
     }
+    if (firstRowForTitles) rows.shift();
     return rows;
 }
