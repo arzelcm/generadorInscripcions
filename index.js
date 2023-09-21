@@ -193,23 +193,24 @@ async function downloadInscriptions() {
             })
 
             // Protocols comi lila
-            if (inscription[35] == 'Conec els protocols i hi estic d\'acord.') {
-                firstPage.drawText('x', {
-                    x: 49,
-                    y: height - 709,
-                    size: 10
-                })   
-            }
+            firstPage.drawText('x', {
+                x: 49,
+                y: height - 709,
+                size: 10
+            })
 
             /* PAGE 2 */
             const secondPage = pages[1];
             console.log(inscription);
 
+            
             // Ha de seguir algun règim de salut?
-            secondPage.drawText(inscription[25] || '', {
+            const wrapRegim = wrap({text: inscription[25]})
+            secondPage.drawText(wrapRegim.text || '', {
                 x: 53,
                 y: height - 115,
-                size: 9
+                size: wrapRegim.size,
+                lineHeight: wrapRegim.lineHeight
             })
 
 
@@ -412,7 +413,9 @@ function wrap(opts) {
     if (!opts.hasOwnProperty('size')) opts.size = 11
     if (!opts.hasOwnProperty('lineHeight')) opts.lineHeight = 14
     if (!opts.hasOwnProperty('maxHeight')) opts.maxHeight = 20
-    if (!opts.hasOwnProperty('maxWidth')) opts.maxWidth = 970
+    if (!opts.hasOwnProperty('maxWidth')) opts.maxWidth = 1150
+    if (!opts.hasOwnProperty('fallBackText')) opts.fallBackText = 'No'
+    if (!opts.hasOwnProperty('fallBackText') || opts.text === '') opts.text = opts.fallBackText
 
     const charsPerLine = Math.floor(opts.maxWidth / opts.size);
     const linesAmount = Math.ceil(opts.text.length / charsPerLine);
