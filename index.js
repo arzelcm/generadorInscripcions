@@ -343,7 +343,7 @@ async function downloadInscriptions() {
                 })
 
                 // vacunes
-                const wrappedVacunes = wrap({ deb: 5, text: inscription[29], fallBackText: '' });
+                const wrappedVacunes = wrap({ deb: 5, text: inscription[29], fallBackText: '-' });
                 secondPage.drawText(wrappedVacunes.text || '', {
                     x: 53,
                     y: height - 410,
