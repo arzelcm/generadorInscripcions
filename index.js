@@ -163,7 +163,7 @@ async function downloadInscriptions() {
                 })
 
                 // Autorització imatge
-                if (inscription[17] == 'Sí') {
+                if (inscription[18] == 'Sí') {
                     // ticksi
                     firstPage.drawText('x', {
                         x: width - 110.5,
@@ -180,7 +180,7 @@ async function downloadInscriptions() {
                 }
 
                 // Autorització tornar sol/a
-                if (inscription[18] == 'Sí') {
+                if (inscription[19] == 'Sí') {
                     // ticksi
                     firstPage.drawText('x', {
                         x: 307,
@@ -198,7 +198,7 @@ async function downloadInscriptions() {
 
 
                 // Autorització medicaments
-                if (inscription[19] == 'Sí') {
+                if (inscription[20] == 'Sí') {
                     // ticksi
                     firstPage.drawText('x', {
                         x: 326.5,
@@ -216,7 +216,7 @@ async function downloadInscriptions() {
 
 
                 // Pes
-                firstPage.drawText(inscription[20], {
+                firstPage.drawText(inscription[21], {
                     x: 120,
                     y: height - 687,
                     size: 10
@@ -235,7 +235,7 @@ async function downloadInscriptions() {
 
 
                 // Ha de seguir algun règim de salut?
-                const wrapRegim = wrap({ deb: 1, text: inscription[25] })
+                const wrapRegim = wrap({ deb: 1, text: inscription[26] })
                 secondPage.drawText(wrapRegim.text || '', {
                     x: 53,
                     y: height - 115,
@@ -245,7 +245,7 @@ async function downloadInscriptions() {
 
 
                 // És habil
-                if (inscription[21] == 'Sí') {
+                if (inscription[22] == 'Sí') {
                     // ticksi
                     secondPage.drawText('x', {
                         x: 106,
@@ -263,7 +263,7 @@ async function downloadInscriptions() {
 
 
                 // Sap nedar
-                if (inscription[22] == 'Sí') {
+                if (inscription[23] == 'Sí') {
                     // ticksi
                     secondPage.drawText('x', {
                         x: 116,
@@ -281,7 +281,7 @@ async function downloadInscriptions() {
 
 
                 // Es fatiga
-                if (inscription[23] == 'Sí') {
+                if (inscription[24] == 'Sí') {
                     // ticksi
                     secondPage.drawText('x', {
                         x: 153.2,
@@ -298,7 +298,7 @@ async function downloadInscriptions() {
                 }
 
                 // Es mareja
-                if (inscription[24] == 'Sí') {
+                if (inscription[25] == 'Sí') {
                     // ticksi
                     secondPage.drawText('x', {
                         x: 173.3,
@@ -316,7 +316,7 @@ async function downloadInscriptions() {
 
 
                 // es posa malalt?
-                const wrapMalalt = wrap({ deb: 2, text: inscription[26] })
+                const wrapMalalt = wrap({ deb: 2, text: inscription[27] })
                 secondPage.drawText(wrapMalalt.text || '', {
                     x: 53,
                     y: height - 285,
@@ -325,7 +325,7 @@ async function downloadInscriptions() {
                 })
 
                 // alèrgia
-                const wrapAlergia = wrap({ deb: 3, text: inscription[27] })
+                const wrapAlergia = wrap({ deb: 3, text: inscription[28] })
                 secondPage.drawText(wrapAlergia.text || '', {
                     x: 53,
                     y: height - 325,
@@ -334,7 +334,7 @@ async function downloadInscriptions() {
                 })
 
                 // malaltia
-                const wrappedMalaltia = wrap({ deb: 4, text: inscription[28] });
+                const wrappedMalaltia = wrap({ deb: 4, text: inscription[29] });
                 secondPage.drawText(wrappedMalaltia.text || '', {
                     x: 53,
                     y: height - 370,
@@ -343,7 +343,7 @@ async function downloadInscriptions() {
                 })
 
                 // vacunes
-                const wrappedVacunes = wrap({ deb: 5, text: inscription[29], fallBackText: 'Sí' });
+                const wrappedVacunes = wrap({ deb: 5, text: inscription[30], fallBackText: 'Sí' });
                 secondPage.drawText(wrappedVacunes.text || '', {
                     x: 53,
                     y: height - 410,
@@ -352,7 +352,7 @@ async function downloadInscriptions() {
                 })
 
                 // medicament
-                const wrappedMedicament = wrap({ deb: 6, text: inscription[30] });
+                const wrappedMedicament = wrap({ deb: 6, text: inscription[31] });
                 secondPage.drawText(wrappedMedicament.text || '', {
                     x: 53,
                     y: height - 455,
@@ -361,7 +361,7 @@ async function downloadInscriptions() {
                 })
 
                 // impediments
-                const wrappedImpediments = wrap({ deb: 7, text: inscription[31] });
+                const wrappedImpediments = wrap({ deb: 7, text: inscription[32] });
                 secondPage.drawText(wrappedImpediments.text || '', {
                     x: 53,
                     y: height - 502,
@@ -370,7 +370,7 @@ async function downloadInscriptions() {
                 })
 
                 // observacions
-                wrappedObservacions = wrap({ deb: 8, text: inscription[32] })
+                wrappedObservacions = wrap({ deb: 8, text: inscription[33] })
                 secondPage.drawText(wrappedObservacions.text || '', {
                     x: 53,
                     y: height - 554,
@@ -381,7 +381,7 @@ async function downloadInscriptions() {
                 // Link al drive targeta sanitària
                 wrappedObservacions = wrap({
                     deb: 9,
-                    text: inscription[33],
+                    text: inscription[34],
                     maxHeight: 25,
                     size: 8
                 })
@@ -408,27 +408,27 @@ async function downloadInscriptions() {
 function getActivityByDate(date) {
     console.log('date:', date);
     const yearsMap = {
-        2018: 'Casal Hivern Minis 2023-2024',
-        2017: 'Casal Hivern Minis 2023-2024',
-        2016: 'Casal Hivern Minis 2023-2024',
-        2015: 'Casal Hivern Petits 2023-2024',
-        2014: 'Casal Hivern Petits 2023-2024',
-        2013: 'Casal Hivern Grans 2023-2024',
-        2012: 'Casal Hivern Grans 2023-2024',
-        2011: 'Casal Hivern Trauet 2023-2024',
-        2010: 'Casal Hivern Trau 2023-2024',
-        2009: 'Projecte Nou 2023-2024',
-        2008: 'Projecte Carbó 2023-2024',
-        2007: 'Projecte Menta 2023-2024',
-        2006: 'Projecte Malva 2023-2024',
-        2005: 'Projecte Taronja 2023-2024',
-        2004: 'Projecte Rubí 2023-2024',
-        2003: 'Projecte Indi 2023-2024',
-        2002: 'Projecte Blanc 2023-2024',
-        2001: 'Projecte Zinc 2023-2024',
-        2000: 'Projecte Safir 2023-2024',
-        1999: 'Projecte Coure 2023-2024',
-        1998: 'Projecte Llima 2023-2024',
+        2018: 'Colònies Minis 2024',
+        2017: 'Colònies Minis 2024',
+        2016: 'Colònies Minis 2024',
+        2015: 'Colònies Petits 2024',
+        2014: 'Colònies Petits 2024',
+        2013: 'Colònies Grans 2024',
+        2012: 'Colònies Grans 2024',
+        2011: 'Campaments Trauet 2024',
+        2010: 'Campaments Trau 2024',
+        2009: 'Ruta Morat 2024',
+        2008: 'Ruta Carbó 2024',
+        2007: 'Ruta Menta 2024',
+        2006: 'Ruta Malva 2024',
+        2005: 'Colònies Taronja 2024',
+        2004: 'Colònies Rubí 2023-2024',
+        2003: 'Colònies Indi 2023-2024',
+        2002: 'Colònies Blanc 2024',
+        2001: 'Colònies Zinc 2023-2024',
+        2000: 'Colònies Safir 2024',
+        1999: 'Colònies Coure 2024',
+        1998: 'Colònies Llima 2024',
         '': 'Casal Hivern 2023-2024'
     }
     const year = date.split('/')[2];
