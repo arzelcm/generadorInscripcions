@@ -453,6 +453,7 @@ function wrap(opts) {
         if (!opts.hasOwnProperty('maxWidth')) opts.maxWidth = 1150
         if (!opts.hasOwnProperty('fallBackText')) opts.fallBackText = 'No'
         if (!opts.hasOwnProperty('text') || opts.text === '') opts.text = opts.fallBackText
+        if (!text in opts) opts.text = ''
 
         console.log(opts);
         const charsPerLine = Math.floor(opts.maxWidth / opts.size);
