@@ -216,7 +216,7 @@ async function downloadInscriptions() {
 
 
                 // Pes
-                firstPage.drawText(inscription[21], {
+                firstPage.drawText(inscription[21] || '', {
                     x: 120,
                     y: height - 687,
                     size: 10
