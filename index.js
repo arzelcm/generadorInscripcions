@@ -329,7 +329,7 @@ async function downloadInscriptions() {
                 const wrapAlergia = wrap({ deb: 3, text: inscription[28] })
                 secondPage.drawText(wrapAlergia.text || '', {
                     x: 53,
-                    y: height - 325,
+                    y: height - 327,
                     size: wrapAlergia.size,
                     lineHeight: wrapAlergia.lineHeight
                 })
@@ -353,7 +353,7 @@ async function downloadInscriptions() {
                 })
 
                 // medicament
-                const wrappedMedicament = wrap({ deb: 6, text: inscription[31] });
+                const wrappedMedicament = wrap({ deb: 6, text: inscription[31].toLowerCase() });
                 secondPage.drawText(wrappedMedicament.text || '', {
                     x: 53,
                     y: height - 455,
@@ -453,8 +453,8 @@ function wrap(opts) {
         if (!opts.hasOwnProperty('maxHeight')) opts.maxHeight = 20
         if (!opts.hasOwnProperty('maxWidth')) opts.maxWidth = 1150
         if (!opts.hasOwnProperty('fallBackText')) opts.fallBackText = 'No'
-        if (!opts.hasOwnProperty('text') || opts.text === '') opts.text = opts.fallBackText
-        if (!'text' in opts) opts.text = ''
+        if (!'text' in opts || !opts.text) opts.text = ''
+        if (opts.text === '') opts.text = opts.fallBackText
 
         console.log(opts);
         const charsPerLine = Math.floor(opts.maxWidth / opts.size);
