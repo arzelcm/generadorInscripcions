@@ -27,6 +27,7 @@ async function setEventListeners() {
 
             choosenFileLabel.innerHTML = `<u>${fileInput.files[0].name}</u> (${inscriptions.length} inscripcions)`;
             choosenFileLabel.classList.add('visible');
+            downloadButton.removeAttribute('disabled');
 
             // downloadInscriptions();
         }
