@@ -6,6 +6,7 @@ body {
 }
 
 button {
+    user-select: none;
     font-family: Roboto;
     padding: 14px 18px;
     border-radius: 6px;
