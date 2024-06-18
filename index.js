@@ -353,7 +353,8 @@ async function downloadInscriptions() {
                 })
 
                 // medicament
-                const wrappedMedicament = wrap({ deb: 6, text: inscription[31].toLowerCase() });
+                const medicamentText = inscription[31] || '';
+                const wrappedMedicament = wrap({ deb: 6, text: medicamentText.toLowerCase() });
                 secondPage.drawText(wrappedMedicament.text || '', {
                     x: 53,
                     y: height - 455,
