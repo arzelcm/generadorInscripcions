@@ -452,7 +452,7 @@ function wrap(opts) {
         if (!opts.hasOwnProperty('size')) opts.size = 11
         if (!opts.hasOwnProperty('lineHeight')) opts.lineHeight = 14
         if (!opts.hasOwnProperty('maxHeight')) opts.maxHeight = 20
-        if (!opts.hasOwnProperty('maxWidth')) opts.maxWidth = 1150
+        if (!opts.hasOwnProperty('maxWidth')) opts.maxWidth = 1100
         if (!opts.hasOwnProperty('fallBackText')) opts.fallBackText = 'No'
         if (!'text' in opts || !opts.text) opts.text = ''
         if (opts.text === '') opts.text = opts.fallBackText
